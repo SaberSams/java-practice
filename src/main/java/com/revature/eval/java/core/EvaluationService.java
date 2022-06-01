@@ -227,8 +227,18 @@ public class EvaluationService {
 	 * invalid value.
 	 */
 	public int sumFirstAndLastDigit(int num) {
-		// TODO Write an implementation for this method declaration
-		return 0;
+		// if negative, return -1
+		if (num < 0) { return -1; }
+
+		// store last digit
+		int last = num % 10;
+
+		// first digit
+		while (num > 10) {
+			num /= 10;
+		}
+
+		return last + num;
 	}
 
 	/**
@@ -238,8 +248,11 @@ public class EvaluationService {
 	 * reverses a String. Example: reverse("example"); -> "elpmaxe"
 	 */
 	public String reverse(String string) {
-		// TODO Write an implementation for this method declaration
-		return null;
+		String returnString = "";
+		for(int i = string.length() - 1; i >= 0; i--){
+			returnString += string.charAt(i);
+		}
+		return returnString;
 	}
 
 	/**
