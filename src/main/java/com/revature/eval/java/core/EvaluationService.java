@@ -142,7 +142,7 @@ public class EvaluationService {
 	 * 6. Minutes To Years and Days Calculator
 	 * 
 	 * Write a method printYearsAndDays with parameter of type long named minutes.
-	 * The method should not return anything (void) and it needs to calculate the
+	 * The method should return a string and it needs to calculate the
 	 * years and days from the minutes parameter.
 	 * 
 	 * If the parameter is less than 0, print text "Invalid Value".
@@ -154,8 +154,14 @@ public class EvaluationService {
 	 * ZZ represents the calculated days.
 	 */
 	public String printYearsAndDays(long minutes) {
-		// TODO Write an implementation for this method declaration
-		return null;
+		final int MINUTES_IN_YEAR = 525600;
+		final int MINUTES_IN_DAY = 1440;
+		if (minutes < 0) {
+			return "Invalid Value";
+		}
+		int years = (int) (minutes / MINUTES_IN_YEAR);
+		int days = (int) ((minutes % MINUTES_IN_YEAR) / MINUTES_IN_DAY);
+		return minutes + " min = " + years + " y and " + days + " d";
 	}
 
 	/**
