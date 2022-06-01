@@ -200,9 +200,17 @@ public class EvaluationService {
 	 * The greatest common divisor is 6 since both 12 and 30 can be divided by 6,
 	 * and there is no resulting remainder.
 	 */
-	public int getGreatestCommonDivisor(int first, int second) {
-		// TODO Write an implementation for this method declaration
-		return 0;
+	public int getGreatestCommonDivisor(int a, int b) {
+		return (a < 10 || b < 10) ? -1 : __getGreatestCommonDivisor__(a, b);
+	}
+
+	// helper function to allow for returning -1 if invalid
+	private int __getGreatestCommonDivisor__(int a, int b) {
+		// Euclidean division
+		if (b == 0) {
+			return a;
+		}
+		return __getGreatestCommonDivisor__(b, a % b);
 	}
 
 	/**
