@@ -263,8 +263,12 @@ public class EvaluationService {
 	 * long name like Portable Network Graphics to its acronym (PNG).
 	 */
 	public String acronym(String phrase) {
-		// TODO Write an implementation for this method declaration
-		return null;
+		String[] words = phrase.split("[ -]");
+		String acronym = "";
+		for (String word : words) {
+			acronym += word.charAt(0);
+		}
+		return acronym.toUpperCase();
 	}
 
 	/**
