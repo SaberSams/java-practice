@@ -3,6 +3,7 @@ package com.revature.eval.java.core;
 import java.util.List;
 import java.util.Map;
 
+
 public class EvaluationService {
 
 	/**
@@ -44,7 +45,9 @@ public class EvaluationService {
 		 * Value"
 		 */
 		public static String printConversion(double kilometersPerHour) {
-				return kilometersPerHour + " km/h = " + toMilesPerHour(kilometersPerHour) + " mi/h";
+				return kilometersPerHour < 0 ?
+				"Invalid Value" :
+				kilometersPerHour + " km/h = " + toMilesPerHour(kilometersPerHour) + " mi/h";
 		}
 	}
 
@@ -68,9 +71,16 @@ public class EvaluationService {
 	 * If the parameter kiloBytes is less than 0 then print the text "Invalid
 	 * Value".
 	 */
-	public String printMegaBytesAndKiloBytes(int XX) {
-		// TODO Write an implementation for this method declaration
-		return null;
+	public String printMegaBytesAndKiloBytes(int divisor){
+		final int MEGABYTE_SIZE = 1024;
+		return divisor < 0 ? 
+			"Invalid Value" :
+			divisor + " KB = " + divisor / MEGABYTE_SIZE + " MB and " + divisor % MEGABYTE_SIZE + " KB";
+	}
+
+	public static void main(String[] args) {
+		EvaluationService es = new EvaluationService();
+		System.out.println(es.printMegaBytesAndKiloBytes(2500));
 	}
 
 	/**
