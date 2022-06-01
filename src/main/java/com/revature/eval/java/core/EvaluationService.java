@@ -1,5 +1,6 @@
 package com.revature.eval.java.core;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -174,8 +175,10 @@ public class EvaluationService {
 	 * statement or switch statement whatever is easier for you.
 	 */
 	public String printNumberInWord(int number) {
-		// TODO Write an implementation for this method declaration
-		return null;
+		final String[] STRING_REPRESENTATION = {
+				"ZERO", "ONE", "TWO", "THREE", "FOUR", "FIVE", "SIX", "SEVEN", "EIGHT", "NINE"
+		};
+		return number < 0 || number > 9 ? "OTHER" : STRING_REPRESENTATION[number];
 	}
 
 	/**
