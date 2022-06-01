@@ -112,8 +112,7 @@ public class EvaluationService {
 	 * Otherwise, return false;
 	 */
 	public boolean areEqualByThreeDecimalPlaces(double firstNum, double secondNum) {
-		// TODO Write an implementation for this method declaration
-		return false;
+		return Math.abs(firstNum - secondNum) < 0.001;
 	}
 
 	/**
