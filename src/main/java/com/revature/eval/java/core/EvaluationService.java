@@ -3,7 +3,6 @@ package com.revature.eval.java.core;
 import java.util.List;
 import java.util.Map;
 
-
 public class EvaluationService {
 
 	/**
@@ -45,9 +44,8 @@ public class EvaluationService {
 		 * Value"
 		 */
 		public static String printConversion(double kilometersPerHour) {
-				return kilometersPerHour < 0 ?
-				"Invalid Value" :
-				kilometersPerHour + " km/h = " + toMilesPerHour(kilometersPerHour) + " mi/h";
+			return kilometersPerHour < 0 ? "Invalid Value"
+					: kilometersPerHour + " km/h = " + toMilesPerHour(kilometersPerHour) + " mi/h";
 		}
 	}
 
@@ -71,16 +69,10 @@ public class EvaluationService {
 	 * If the parameter kiloBytes is less than 0 then print the text "Invalid
 	 * Value".
 	 */
-	public String printMegaBytesAndKiloBytes(int divisor){
+	public String printMegaBytesAndKiloBytes(int divisor) {
 		final int MEGABYTE_SIZE = 1024;
-		return divisor < 0 ? 
-			"Invalid Value" :
-			divisor + " KB = " + divisor / MEGABYTE_SIZE + " MB and " + divisor % MEGABYTE_SIZE + " KB";
-	}
-
-	public static void main(String[] args) {
-		EvaluationService es = new EvaluationService();
-		System.out.println(es.printMegaBytesAndKiloBytes(2500));
+		return divisor < 0 ? "Invalid Value"
+				: divisor + " KB = " + divisor / MEGABYTE_SIZE + " MB and " + divisor % MEGABYTE_SIZE + " KB";
 	}
 
 	/**
@@ -103,8 +95,9 @@ public class EvaluationService {
 	 * If the hourOfDay parameter is less than 0 or greater than 23, return false.
 	 */
 	public boolean shouldWakeUp(boolean isBarking, int hourOfDay) {
-		// TODO Write an implementation for this method declaration
-		return false;
+		return isBarking && 												// dog is barking
+				(hourOfDay >= 0 && hourOfDay <= 23) && 	// hour is valid
+				(hourOfDay < 8 || hourOfDay > 22); 			// hour is between 8 and 22
 	}
 
 	/**
@@ -450,7 +443,7 @@ public class EvaluationService {
 	}
 
 	/**
-	 * 20. Sum of Multiples 
+	 * 20. Sum of Multiples
 	 * 
 	 * Given a number, find the sum of all the unique multiples of particular
 	 * numbers up to but not including that number.
@@ -463,21 +456,22 @@ public class EvaluationService {
 	public int getSumOfMultiples(int i, int[] set) {
 		return 0;
 	}
-	
+
 	/**
 	 * 21. Three Magic Numbers
 	 * 
-	 * You work at a casino in Las Vegas.  Your job is to program a slot machine to
+	 * You work at a casino in Las Vegas. Your job is to program a slot machine to
 	 * return 3 random numbers using the java.util.Random class.
 	 * 
 	 * Write a method to return an int array of 3 random numbers between 1 - 100.
-	 * Generate the 3 random numbers (1 - 100 inclusive) using the java.util.Random class.
+	 * Generate the 3 random numbers (1 - 100 inclusive) using the java.util.Random
+	 * class.
 	 */
-	
+
 	public int[] threeLuckyNumbers() {
 		return null;
 	}
-	
+
 	/*
 	 * 22. Easy Guessing Game
 	 * 
@@ -485,9 +479,10 @@ public class EvaluationService {
 	 * int x = minimum
 	 * iny y = maximum (inclusive)
 	 * 
-	 * You must use the Math.random class to generate a random number between x and y.
+	 * You must use the Math.random class to generate a random number between x and
+	 * y.
 	 */
-	
+
 	public int guessingGame(int x, int y) {
 		return 0;
 	}
