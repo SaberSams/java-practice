@@ -95,9 +95,9 @@ public class EvaluationService {
 	 * If the hourOfDay parameter is less than 0 or greater than 23, return false.
 	 */
 	public boolean shouldWakeUp(boolean isBarking, int hourOfDay) {
-		return isBarking && 												// dog is barking
-				(hourOfDay >= 0 && hourOfDay <= 23) && 	// hour is valid
-				(hourOfDay < 8 || hourOfDay > 22); 			// hour is between 8 and 22
+		return isBarking && // dog is barking
+				(hourOfDay >= 0 && hourOfDay <= 23) && // hour is valid
+				(hourOfDay < 8 || hourOfDay > 22); // hour is between 8 and 22
 	}
 
 	/**
@@ -128,16 +128,13 @@ public class EvaluationService {
 	static class TeenNumberChecker {
 
 		public static boolean hasTeen(int x, int y, int z) {
-			// TODO Write an implementation for this method declaration
-			return false;
+			return isTeen(x) || isTeen(y) || isTeen(z);
 		}
 
 		// We can initialize isTeen method first
 		// Then pass the parameter to hasTeen method
-
 		public static boolean isTeen(int number) {
-			// TODO Write an implementation for this method declaration
-			return false;
+			return number >= 13 && number <= 19;
 		}
 	}
 
