@@ -228,7 +228,9 @@ public class EvaluationService {
 	 */
 	public int sumFirstAndLastDigit(int num) {
 		// if negative, return -1
-		if (num < 0) { return -1; }
+		if (num < 0) {
+			return -1;
+		}
 
 		// store last digit
 		int last = num % 10;
@@ -249,7 +251,7 @@ public class EvaluationService {
 	 */
 	public String reverse(String string) {
 		String returnString = "";
-		for(int i = string.length() - 1; i >= 0; i--){
+		for (int i = string.length() - 1; i >= 0; i--) {
 			returnString += string.charAt(i);
 		}
 		return returnString;
@@ -341,15 +343,15 @@ public class EvaluationService {
 	 * 
 	 * Given a word, compute the scrabble score for that word.
 	 * 
-	 * --Letter Values-- Letter Value 
+	 * --Letter Values-- Letter Value
 	 * 
-	 * A, E, I, O, U, L, N, R, S, T = 1; 
-	 * D, G = 2; 
+	 * A, E, I, O, U, L, N, R, S, T = 1;
+	 * D, G = 2;
 	 * B, C, M, P = 3
 	 * F, H, V, W, Y = 4
 	 * K = 5
 	 * J, X = 8
-	 * Q, Z = 10; 
+	 * Q, Z = 10;
 	 * 
 	 * Examples
 	 * "cabbage" should be scored as worth 14 points:
@@ -389,8 +391,8 @@ public class EvaluationService {
 		letterValues.put('Z', 10);
 
 		int score = 0;
-		for(char element: string.toUpperCase().toCharArray()){
-			if(!letterValues.containsKey(element)){
+		for (char element : string.toUpperCase().toCharArray()) {
+			if (!letterValues.containsKey(element)) {
 				return -1;
 			}
 			score += letterValues.get(element);
@@ -423,7 +425,11 @@ public class EvaluationService {
 	 * 
 	 * For example, the inputs
 	 * 
-	 * +1 (613)-995-0253 613-995-0253 1 613 995 0253 613.995.0253 should all produce
+	 * +1 (613)-995-0253 
+	 * 613-995-0253 
+	 * 1 613 995 0253 
+	 * 613.995.0253 
+	 * should all produce
 	 * the output
 	 * 
 	 * 6139950253
@@ -431,8 +437,17 @@ public class EvaluationService {
 	 * Note: As this exercise only deals with telephone numbers used in
 	 * NANP-countries, only 1 is considered a valid country code.
 	 */
-	public String cleanPhoneNumber(String string) {
-		return null;
+	public String cleanPhoneNumber(String string) throws IllegalArgumentException {
+		//TODO - implement this method using only regex
+		string = string.replaceAll("[^0-9]", "");
+		if((string.length() > 11) || // too many digits
+			(string.length() < 10) ||  // not enough digits
+			(string.length() == 11 && !string.startsWith("1"))) // invalid country code
+		{
+			throw new IllegalArgumentException();
+		}
+		return string.substring(string.length() - 10, string.length());
+
 	}
 
 	/**
