@@ -283,58 +283,55 @@ public class EvaluationService {
 	 * has all sides of different lengths.
 	 */
 	static class Triangle {
-		private double sideOne;
-		private double sideTwo;
-		private double sideThree;
+		private double a;
+		private double b;
+		private double c;
 
 		public Triangle() {
 			super();
 		}
 
-		public Triangle(double sideOne, double sideTwo, double sideThree) {
+		public Triangle(double a, double b, double c) {
 			this();
-			this.sideOne = sideOne;
-			this.sideTwo = sideTwo;
-			this.sideThree = sideThree;
+			this.a = a;
+			this.b = b;
+			this.c = c;
 		}
 
 		public double getSideOne() {
-			return sideOne;
+			return a;
 		}
 
 		public void setSideOne(double sideOne) {
-			this.sideOne = sideOne;
+			this.a = sideOne;
 		}
 
 		public double getSideTwo() {
-			return sideTwo;
+			return b;
 		}
 
 		public void setSideTwo(double sideTwo) {
-			this.sideTwo = sideTwo;
+			this.b = sideTwo;
 		}
 
 		public double getSideThree() {
-			return sideThree;
+			return c;
 		}
 
 		public void setSideThree(double sideThree) {
-			this.sideThree = sideThree;
+			this.c = sideThree;
 		}
 
 		public boolean isEquilateral() {
-			// TODO Write an implementation for this method declaration
-			return false;
+			return a == b && b == c;
 		}
 
 		public boolean isIsosceles() {
-			// TODO Write an implementation for this method declaration
-			return false;
+			return (a == b || b == c || c == a);
 		}
 
 		public boolean isScalene() {
-			// TODO Write an implementation for this method declaration
-			return false;
+			return (a != b) && (b != c) && (c != a);
 		}
 
 	}
@@ -344,8 +341,17 @@ public class EvaluationService {
 	 * 
 	 * Given a word, compute the scrabble score for that word.
 	 * 
-	 * --Letter Values-- Letter Value A, E, I, O, U, L, N, R, S, T = 1; D, G = 2; B,
-	 * C, M, P = 3; F, H, V, W, Y = 4; K = 5; J, X = 8; Q, Z = 10; Examples
+	 * --Letter Values-- Letter Value 
+	 * 
+	 * A, E, I, O, U, L, N, R, S, T = 1; 
+	 * D, G = 2; 
+	 * B, C, M, P = 3
+	 * F, H, V, W, Y = 4
+	 * K = 5
+	 * J, X = 8
+	 * Q, Z = 10; 
+	 * 
+	 * Examples
 	 * "cabbage" should be scored as worth 14 points:
 	 * 
 	 * 3 points for C, 1 point for A, twice 3 points for B, twice 2 points for G, 1
@@ -354,8 +360,42 @@ public class EvaluationService {
 	 * 3 + 2*1 + 2*3 + 2 + 1 = 3 + 2 + 6 + 3 = 5 + 9 = 14
 	 */
 	public int getScrabbleScore(String string) {
-		// TODO Write an implementation for this method declaration
-		return 0;
+		final HashMap<Character, Integer> letterValues = new HashMap<Character, Integer>();
+		letterValues.put('A', 1);
+		letterValues.put('B', 3);
+		letterValues.put('C', 3);
+		letterValues.put('D', 2);
+		letterValues.put('E', 1);
+		letterValues.put('F', 4);
+		letterValues.put('G', 2);
+		letterValues.put('H', 4);
+		letterValues.put('I', 1);
+		letterValues.put('J', 8);
+		letterValues.put('K', 5);
+		letterValues.put('L', 1);
+		letterValues.put('M', 3);
+		letterValues.put('N', 1);
+		letterValues.put('O', 1);
+		letterValues.put('P', 3);
+		letterValues.put('Q', 10);
+		letterValues.put('R', 1);
+		letterValues.put('S', 1);
+		letterValues.put('T', 1);
+		letterValues.put('U', 1);
+		letterValues.put('V', 4);
+		letterValues.put('W', 4);
+		letterValues.put('X', 8);
+		letterValues.put('Y', 4);
+		letterValues.put('Z', 10);
+
+		int score = 0;
+		for(char element: string.toUpperCase().toCharArray()){
+			if(!letterValues.containsKey(element)){
+				return -1;
+			}
+			score += letterValues.get(element);
+		}
+		return score;
 	}
 
 	/**
