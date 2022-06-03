@@ -1,10 +1,13 @@
 package com.revature.eval.java.core;
 
+import java.lang.reflect.Array;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class EvaluationService {
+
+	private Map<Integer[], Double> powMemo = new HashMap<>();
 
 	/**
 	 * 1.A Speed Converter - Convert to MilesPerHour
@@ -20,6 +23,8 @@ public class EvaluationService {
 	 * and return it. For conversion and rounding use Math.round().
 	 */
 	static class SpeedConverter {
+
+		// this is a memo for question 16
 
 		public static long toMilesPerHour(double kilometersPerHour) {
 			if (kilometersPerHour < 0) {
@@ -425,10 +430,10 @@ public class EvaluationService {
 	 * 
 	 * For example, the inputs
 	 * 
-	 * +1 (613)-995-0253 
-	 * 613-995-0253 
-	 * 1 613 995 0253 
-	 * 613.995.0253 
+	 * +1 (613)-995-0253
+	 * 613-995-0253
+	 * 1 613 995 0253
+	 * 613.995.0253
 	 * should all produce
 	 * the output
 	 * 
@@ -438,11 +443,11 @@ public class EvaluationService {
 	 * NANP-countries, only 1 is considered a valid country code.
 	 */
 	public String cleanPhoneNumber(String string) throws IllegalArgumentException {
-		//TODO - implement this method using only regex
+		// TODO - implement this method using only regex
 		string = string.replaceAll("[^0-9]", "");
-		if((string.length() > 11) || // too many digits
-			(string.length() < 10) ||  // not enough digits
-			(string.length() == 11 && !string.startsWith("1"))) // invalid country code
+		if ((string.length() > 11) || // too many digits
+				(string.length() < 10) || // not enough digits
+				(string.length() == 11 && !string.startsWith("1"))) // invalid country code
 		{
 			throw new IllegalArgumentException();
 		}
@@ -459,8 +464,17 @@ public class EvaluationService {
 	 * free: 1
 	 */
 	public Map<String, Integer> wordCount(String string) {
-		// TODO Write an implementation for this method declaration
-		return null;
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		String[] words = string.split("[ ,.!;:?-]");
+		for (String word : words) {
+			word = word.trim();
+			if (map.containsKey(word)) {
+				map.put(word, map.get(word) + 1);
+			} else {
+				map.put(word, 1);
+			}
+		}
+		return map;
 	}
 
 	/**
@@ -477,8 +491,44 @@ public class EvaluationService {
 	 * != 1^3 + 5^3 + 4^3 = 1 + 125 + 64 = 190 Write some code to determine whether
 	 * a number is an Armstrong number.
 	 */
+
+	public double memoizedPOW(int base, int exponent) {
+		Integer[] params = new Integer[] { base, exponent };
+		if (!this.powMemo.containsKey(params)) {
+			this.powMemo.put(params, Math.pow(base, exponent));
+		}
+		return this.powMemo.get(params);
+	}
+
 	public boolean isArmstrongNumber(int input) {
+		/**
+		 * max value for int is 2147483647 which is 10 digits, one extra to store a 10
+		 * as an escape character
+		 * storing it in a char array because the digits will only be up to 9 and this
+		 * is a 💪
+		 */
+		char[] digits = new char[11];
+
+		// split into digits
+		int i, temp = input;
+
+		for(i = 0; temp != 0; i++) {
+			digits[i] = (char) (temp % 10 + '0');
+			temp /= 10;
+			i++;
+		}
+
+		/**
+		 * Now I need to calculate the digits and memoize them
+		 */
+
+		System.out.println(digits);
 		return false;
+	}
+
+	public static void main(String[] args) {
+		EvaluationService es = new EvaluationService();
+		System.out.println(es.isArmstrongNumber(153));
 	}
 
 	/**
