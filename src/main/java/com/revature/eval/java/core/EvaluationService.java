@@ -1,9 +1,12 @@
 package com.revature.eval.java.core;
 
 import java.lang.reflect.Array;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.swing.InputMap;
 
 public class EvaluationService {
 
@@ -500,6 +503,27 @@ public class EvaluationService {
 		return this.powMemo.get(params);
 	}
 
+	/**
+	 * Splits a number into an array of individual digits. For example, the number
+	 * 123456789 would return [1, 2, 3, 4, 5, 6, 7, 8, 9] if a negative number is
+	 * passed it will return an array of negative digits.
+	 * 
+	 * @param input an integer to split into digits
+	 * @return int array of digits in order of most significant to least significant
+	 * @author SaberSams
+	 */
+	static int[] splitInt(int input) {
+		int[] digits = new int[10];
+		int i = 9;
+		do {
+			digits[i] = input % 10;
+			input /= 10;
+			i--;
+		} while (input != 0);
+
+		return Arrays.copyOfRange(digits, i+1, 10);
+	}
+
 	public boolean isArmstrongNumber(int input) {
 		/**
 		 * max value for int is 2147483647 which is 10 digits, one extra to store a 10
@@ -507,28 +531,21 @@ public class EvaluationService {
 		 * storing it in a char array because the digits will only be up to 9 and this
 		 * is a 💪
 		 */
-		char[] digits = new char[11];
 
 		// split into digits
-		int i, temp = input;
 
-		for(i = 0; temp != 0; i++) {
-			digits[i] = (char) (temp % 10 + '0');
-			temp /= 10;
-			i++;
-		}
 
 		/**
 		 * Now I need to calculate the digits and memoize them
 		 */
 
-		System.out.println(digits);
 		return false;
 	}
 
 	public static void main(String[] args) {
 		EvaluationService es = new EvaluationService();
-		System.out.println(es.isArmstrongNumber(153));
+		int[] split = EvaluationService.splitInt(-93241);
+		System.out.println(Arrays.toString(split));
 	}
 
 	/**
