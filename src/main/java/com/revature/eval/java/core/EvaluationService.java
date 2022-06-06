@@ -27,14 +27,8 @@ public class EvaluationService {
 	 */
 	static class SpeedConverter {
 
-		// this is a memo for question 16
-
 		public static long toMilesPerHour(double kilometersPerHour) {
-			if (kilometersPerHour < 0) {
-				return -1;
-			} else {
-				return Math.round(kilometersPerHour * 0.621371);
-			}
+			return kilometersPerHour >= 0 ? Math.round(kilometersPerHour * 0.621371192) : -1;
 		}
 
 		/**
@@ -480,6 +474,8 @@ public class EvaluationService {
 		return map;
 	}
 
+	
+	
 	/**
 	 * 16. Armstrong Number
 	 * 
@@ -494,7 +490,24 @@ public class EvaluationService {
 	 * != 1^3 + 5^3 + 4^3 = 1 + 125 + 64 = 190 Write some code to determine whether
 	 * a number is an Armstrong number.
 	 */
+	public boolean isArmstrongNumber(int input) {
+		int[] digits = splitInt(input);
+		Double sum = 0.0;
+		for(int digit: digits){
+			sum += this.memoizedPOW(digit, digits.length);
+		}
+		return input == sum;
+	}
 
+	/**
+	 * Finds the power of a given base and exponents and memoizes the results. To
+	 * improve performance. This is compleatly pointless to solve the test cases
+	 * but im trying to practice my DP skills in java.
+	 * @param base
+	 * @param exponent
+	 * @return the power of the base to the exponent
+	 * @author SaberSams
+	*/
 	public double memoizedPOW(int base, int exponent) {
 		Integer[] params = new Integer[] { base, exponent };
 		if (!this.powMemo.containsKey(params)) {
@@ -520,32 +533,16 @@ public class EvaluationService {
 			input /= 10;
 			i--;
 		} while (input != 0);
-
+		
 		return Arrays.copyOfRange(digits, i+1, 10);
 	}
-
-	public boolean isArmstrongNumber(int input) {
-		/**
-		 * max value for int is 2147483647 which is 10 digits, one extra to store a 10
-		 * as an escape character
-		 * storing it in a char array because the digits will only be up to 9 and this
-		 * is a 💪
-		 */
-
-		// split into digits
-
-
-		/**
-		 * Now I need to calculate the digits and memoize them
-		 */
-
-		return false;
-	}
-
+	
 	public static void main(String[] args) {
 		EvaluationService es = new EvaluationService();
-		int[] split = EvaluationService.splitInt(-93241);
-		System.out.println(Arrays.toString(split));
+		es.isArmstrongNumber(0);
+		es.isArmstrongNumber(1);
+		es.isArmstrongNumber(153);
+		es.isArmstrongNumber(370);
 	}
 
 	/**
@@ -557,7 +554,6 @@ public class EvaluationService {
 	 * Note that 1 is not a prime number.
 	 */
 	public List<Long> calculatePrimeFactorsOf(long l) {
-		// TODO Write an implementation for this method declaration
 		return null;
 	}
 
@@ -590,8 +586,13 @@ public class EvaluationService {
 	 * insensitive. Input will not contain non-ASCII symbols.
 	 */
 	public boolean isPangram(String string) {
-		// TODO Write an implementation for this method declaration
-		return false;
+		string = string.toLowerCase();
+		for (char c = 'a'; c <= 'z'; c++) {
+			if (string.indexOf(c) == -1) {
+				return false;
+			}
+		}
+		return true;
 	}
 
 	/**
@@ -621,21 +622,24 @@ public class EvaluationService {
 	 */
 
 	public int[] threeLuckyNumbers() {
-		return null;
+		return new int[] { 
+			guessingGame(0, 100),  
+			guessingGame(0, 100),  
+			guessingGame(0, 100)
+		};
 	}
 
-	/*
+	/**
 	 * 22. Easy Guessing Game
 	 * 
-	 * Create a program to generate a number between the given range:
-	 * int x = minimum
-	 * iny y = maximum (inclusive)
-	 * 
+	 * Generates a number between the given range:
+	 * @param minimum
+	 * @param maximum (inclusive)
+	 * @return random int
 	 * You must use the Math.random class to generate a random number between x and
 	 * y.
 	 */
-
-	public int guessingGame(int x, int y) {
-		return 0;
+	public int guessingGame(int minimum, int maximum) {
+		return (int) Math.floor(Math.random() * (maximum - minimum + 1) + minimum);
 	}
 }
