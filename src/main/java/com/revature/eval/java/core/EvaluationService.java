@@ -7,7 +7,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
-
 public class EvaluationService {
 
 	/**
@@ -45,7 +44,8 @@ public class EvaluationService {
 		 * Value"
 		 */
 		public static String printConversion(double kilometersPerHour) {
-			return kilometersPerHour < 0 ? "Invalid Value"
+			return kilometersPerHour < 0
+					? "Invalid Value"
 					: kilometersPerHour + " km/h = " + toMilesPerHour(kilometersPerHour) + " mi/h";
 		}
 	}
@@ -72,7 +72,8 @@ public class EvaluationService {
 	 */
 	public String printMegaBytesAndKiloBytes(int divisor) {
 		final int MEGABYTE_SIZE = 1024;
-		return divisor < 0 ? "Invalid Value"
+		return divisor < 0
+				? "Invalid Value"
 				: divisor + " KB = " + divisor / MEGABYTE_SIZE + " MB and " + divisor % MEGABYTE_SIZE + " KB";
 	}
 
@@ -206,11 +207,8 @@ public class EvaluationService {
 
 	// helper function to allow for returning -1 if invalid
 	private int __getGreatestCommonDivisor__(int a, int b) {
-		// Euclidean division
-		if (b == 0) {
-			return a;
-		}
-		return __getGreatestCommonDivisor__(b, a % b);
+		// Euclidean division method
+		return b == 0 ? a : __getGreatestCommonDivisor__(b, a % b);
 	}
 
 	/**
@@ -362,15 +360,16 @@ public class EvaluationService {
 	 * 3 + 2*1 + 2*3 + 2 + 1 = 3 + 2 + 6 + 3 = 5 + 9 = 14
 	 */
 	public int getScrabbleScore(String string) {
-		// this creating a map of ascii values to their respective scores, most ascii chars are 0
-		//                     a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q,  r, s, t, u, v, w, x, y, z
+		// this creating a map of ascii values to their respective scores, most ascii
+		// chars are 0
+		// a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z
 		final int[] scores = { 1, 3, 3, 2, 1, 4, 2, 4, 1, 8, 5, 1, 3, 1, 1, 3, 10, 1, 1, 1, 1, 4, 4, 8, 4, 10 };
 		int[] scoreMap = new int[128];
 
 		// ignore case by adding lower case and upper case scores at the same time
 		for (int i = 0; i < scores.length; i++) {
-			scoreMap[i + 'A'] = scores[i];	// init uppercase values
-			scoreMap[i + 'a'] = scores[i];	// init lowercase values
+			scoreMap[i + 'A'] = scores[i]; // init uppercase values
+			scoreMap[i + 'a'] = scores[i]; // init lowercase values
 		}
 		// this sums up the scores of that characters
 		int score = 0;
@@ -466,15 +465,14 @@ public class EvaluationService {
 	 * a number is an Armstrong number.
 	 */
 	public boolean isArmstrongNumber(int input) {
-		int[] digits = splitInt(input); // normally I would just use the int.toString() method, but this is more efficient
+		int[] digits = splitInt(input); // normally I would just use the int.toString() method, but this is more
+																		// efficient
 		Double sum = 0.0;
 		for (int digit : digits) {
 			sum += Math.pow(digit, digits.length);
 		}
 		return input == sum;
 	}
-
-
 
 	/**
 	 * Splits a number into an array of individual digits. For example, the number
@@ -518,13 +516,16 @@ public class EvaluationService {
 
 	/**
 	 * takes a number as an argument and checks if its prime
+	 * 
 	 * @param number = the number to check
 	 * @return true if prime
 	 */
 	private static boolean isPrime(long number) {
-		if (number <= 1) {return false;}
+		if (number <= 1) {
+			return false;
+		}
 
-		for (long i = 2; i*i <= number; i++) {
+		for (long i = 2; i * i <= number; i++) {
 			if (number % i == 0) {
 				return false;
 			}
@@ -543,12 +544,16 @@ public class EvaluationService {
 	 * If your language provides methods in the standard library to deal with prime
 	 * numbers, pretend they don't exist and implement them yourself.
 	 */
-	public int calculateNthPrime(int k) throws IllegalArgumentException{
-		if (k < 1) { throw new IllegalArgumentException();}
+	public int calculateNthPrime(int k) throws IllegalArgumentException {
+		if (k < 1) {
+			throw new IllegalArgumentException();
+		}
 
 		int i = 2;
-		for(int j = 0; j < k; i++) {
-			if(isPrime(i)) {j++;}
+		for (int j = 0; j < k; i++) {
+			if (isPrime(i)) {
+				j++;
+			}
 		}
 
 		return i - 1;
@@ -608,15 +613,15 @@ public class EvaluationService {
 	 */
 	public int getSumOfMultiples(int i, int[] set) {
 		HashSet<Integer> multiples = new HashSet();
-		for(int number: set){
-			for(int j = number; j < i; j += number){
-				if(j % number == 0){
+		for (int number : set) {
+			for (int j = number; j < i; j += number) {
+				if (j % number == 0) {
 					multiples.add(j);
 				}
 			}
 		}
 		int sum = 0;
-		for(int number: multiples){
+		for (int number : multiples) {
 			sum += number;
 		}
 		return sum;
