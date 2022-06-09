@@ -1,16 +1,14 @@
 package com.revature.eval.java.core;
 
-import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
-import javax.swing.InputMap;
 
 public class EvaluationService {
-
-	private Map<Integer[], Double> powMemo = new HashMap<>();
 
 	/**
 	 * 1.A Speed Converter - Convert to MilesPerHour
@@ -364,40 +362,20 @@ public class EvaluationService {
 	 * 3 + 2*1 + 2*3 + 2 + 1 = 3 + 2 + 6 + 3 = 5 + 9 = 14
 	 */
 	public int getScrabbleScore(String string) {
-		final HashMap<Character, Integer> letterValues = new HashMap<Character, Integer>();
-		letterValues.put('A', 1);
-		letterValues.put('B', 3);
-		letterValues.put('C', 3);
-		letterValues.put('D', 2);
-		letterValues.put('E', 1);
-		letterValues.put('F', 4);
-		letterValues.put('G', 2);
-		letterValues.put('H', 4);
-		letterValues.put('I', 1);
-		letterValues.put('J', 8);
-		letterValues.put('K', 5);
-		letterValues.put('L', 1);
-		letterValues.put('M', 3);
-		letterValues.put('N', 1);
-		letterValues.put('O', 1);
-		letterValues.put('P', 3);
-		letterValues.put('Q', 10);
-		letterValues.put('R', 1);
-		letterValues.put('S', 1);
-		letterValues.put('T', 1);
-		letterValues.put('U', 1);
-		letterValues.put('V', 4);
-		letterValues.put('W', 4);
-		letterValues.put('X', 8);
-		letterValues.put('Y', 4);
-		letterValues.put('Z', 10);
+		// this creating a map of ascii values to their respective scores, most ascii chars are 0
+		//                     a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q,  r, s, t, u, v, w, x, y, z
+		final int[] scores = { 1, 3, 3, 2, 1, 4, 2, 4, 1, 8, 5, 1, 3, 1, 1, 3, 10, 1, 1, 1, 1, 4, 4, 8, 4, 10 };
+		int[] scoreMap = new int[128];
 
+		// ignore case by adding lower case and upper case scores at the same time
+		for (int i = 0; i < scores.length; i++) {
+			scoreMap[i + 'A'] = scores[i];	// init uppercase values
+			scoreMap[i + 'a'] = scores[i];	// init lowercase values
+		}
+		// this sums up the scores of that characters
 		int score = 0;
-		for (char element : string.toUpperCase().toCharArray()) {
-			if (!letterValues.containsKey(element)) {
-				return -1;
-			}
-			score += letterValues.get(element);
+		for (char element : string.toCharArray()) {
+			score += scoreMap[element];
 		}
 		return score;
 	}
@@ -440,7 +418,6 @@ public class EvaluationService {
 	 * NANP-countries, only 1 is considered a valid country code.
 	 */
 	public String cleanPhoneNumber(String string) throws IllegalArgumentException {
-		// TODO - implement this method using only regex
 		string = string.replaceAll("[^0-9]", "");
 		if ((string.length() > 11) || // too many digits
 				(string.length() < 10) || // not enough digits
@@ -474,8 +451,6 @@ public class EvaluationService {
 		return map;
 	}
 
-	
-	
 	/**
 	 * 16. Armstrong Number
 	 * 
@@ -491,30 +466,15 @@ public class EvaluationService {
 	 * a number is an Armstrong number.
 	 */
 	public boolean isArmstrongNumber(int input) {
-		int[] digits = splitInt(input);
+		int[] digits = splitInt(input); // normally I would just use the int.toString() method, but this is more efficient
 		Double sum = 0.0;
-		for(int digit: digits){
-			sum += this.memoizedPOW(digit, digits.length);
+		for (int digit : digits) {
+			sum += Math.pow(digit, digits.length);
 		}
 		return input == sum;
 	}
 
-	/**
-	 * Finds the power of a given base and exponents and memoizes the results. To
-	 * improve performance. This is compleatly pointless to solve the test cases
-	 * but im trying to practice my DP skills in java.
-	 * @param base
-	 * @param exponent
-	 * @return the power of the base to the exponent
-	 * @author SaberSams
-	*/
-	public double memoizedPOW(int base, int exponent) {
-		Integer[] params = new Integer[] { base, exponent };
-		if (!this.powMemo.containsKey(params)) {
-			this.powMemo.put(params, Math.pow(base, exponent));
-		}
-		return this.powMemo.get(params);
-	}
+
 
 	/**
 	 * Splits a number into an array of individual digits. For example, the number
@@ -533,16 +493,8 @@ public class EvaluationService {
 			input /= 10;
 			i--;
 		} while (input != 0);
-		
-		return Arrays.copyOfRange(digits, i+1, 10);
-	}
-	
-	public static void main(String[] args) {
-		EvaluationService es = new EvaluationService();
-		es.isArmstrongNumber(0);
-		es.isArmstrongNumber(1);
-		es.isArmstrongNumber(153);
-		es.isArmstrongNumber(370);
+
+		return Arrays.copyOfRange(digits, i + 1, 10);
 	}
 
 	/**
@@ -554,7 +506,30 @@ public class EvaluationService {
 	 * Note that 1 is not a prime number.
 	 */
 	public List<Long> calculatePrimeFactorsOf(long l) {
-		return null;
+		List<Long> factors = new ArrayList<Long>();
+		for (long i = 2; i <= l; i++) {
+			while (l % i == 0) {
+				factors.add(i);
+				l /= i;
+			}
+		}
+		return factors;
+	}
+
+	/**
+	 * takes a number as an argument and checks if its prime
+	 * @param number = the number to check
+	 * @return true if prime
+	 */
+	private static boolean isPrime(long number) {
+		if (number <= 1) {return false;}
+
+		for (long i = 2; i*i <= number; i++) {
+			if (number % i == 0) {
+				return false;
+			}
+		}
+		return true;
 	}
 
 	/**
@@ -568,9 +543,15 @@ public class EvaluationService {
 	 * If your language provides methods in the standard library to deal with prime
 	 * numbers, pretend they don't exist and implement them yourself.
 	 */
-	public int calculateNthPrime(int k) {
-		// TODO Write an implementation for this method declaration
-		return 0;
+	public int calculateNthPrime(int k) throws IllegalArgumentException{
+		if (k < 1) { throw new IllegalArgumentException();}
+
+		int i = 2;
+		for(int j = 0; j < k; i++) {
+			if(isPrime(i)) {j++;}
+		}
+
+		return i - 1;
 	}
 
 	/**
@@ -586,13 +567,32 @@ public class EvaluationService {
 	 * insensitive. Input will not contain non-ASCII symbols.
 	 */
 	public boolean isPangram(String string) {
-		string = string.toLowerCase();
-		for (char c = 'a'; c <= 'z'; c++) {
-			if (string.indexOf(c) == -1) {
+		// string = string.toLowerCase();
+		/*
+		 * this is find for small strings or ones where you will find all letters of the
+		 * alphabet quickly
+		 * for (char c = 'a'; c <= 'z'; c++) {
+		 * if (string.indexOf(c) == -1) {
+		 * return false;
+		 * }
+		 * }
+		 * return true;
+		 */
+		// this method has a time complexity of N
+		boolean[] asciMap = new boolean[128];
+		for (char c : string.toCharArray()) {
+			asciMap[c] = true;
+		}
+
+		for (char c = 'A'; c <= 'Z'; c++) {
+			// if neither the lowercase nor uppercase version of the letter was found return
+			// false
+			if (!(asciMap[c] || asciMap[c + 32])) {
 				return false;
 			}
 		}
 		return true;
+
 	}
 
 	/**
@@ -607,7 +607,19 @@ public class EvaluationService {
 	 * The sum of these multiples is 78.
 	 */
 	public int getSumOfMultiples(int i, int[] set) {
-		return 0;
+		HashSet<Integer> multiples = new HashSet();
+		for(int number: set){
+			for(int j = number; j < i; j += number){
+				if(j % number == 0){
+					multiples.add(j);
+				}
+			}
+		}
+		int sum = 0;
+		for(int number: multiples){
+			sum += number;
+		}
+		return sum;
 	}
 
 	/**
@@ -622,10 +634,10 @@ public class EvaluationService {
 	 */
 
 	public int[] threeLuckyNumbers() {
-		return new int[] { 
-			guessingGame(0, 100),  
-			guessingGame(0, 100),  
-			guessingGame(0, 100)
+		return new int[] {
+				guessingGame(0, 100),
+				guessingGame(0, 100),
+				guessingGame(0, 100)
 		};
 	}
 
@@ -633,11 +645,13 @@ public class EvaluationService {
 	 * 22. Easy Guessing Game
 	 * 
 	 * Generates a number between the given range:
+	 * 
 	 * @param minimum
 	 * @param maximum (inclusive)
 	 * @return random int
-	 * You must use the Math.random class to generate a random number between x and
-	 * y.
+	 *         You must use the Math.random class to generate a random number
+	 *         between x and
+	 *         y.
 	 */
 	public int guessingGame(int minimum, int maximum) {
 		return (int) Math.floor(Math.random() * (maximum - minimum + 1) + minimum);

@@ -445,14 +445,6 @@ public class EvaluationServiceTest {
 	}
 
 	@Test
-	public void powFunction () {
-		EvaluationService es = new EvaluationService();
-		assertTrue(8.0 == es.memoizedPOW(2, 3));
-		assertTrue(16.0 == es.memoizedPOW(2, 4));
-		assertTrue(3486784401.0 == es.memoizedPOW(9, 10));
-	}
-
-	@Test
 	public void singleDigitsAreArmstrongNumbers() {
 		int input = 5;
 
