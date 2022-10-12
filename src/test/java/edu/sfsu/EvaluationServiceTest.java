@@ -15,7 +15,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import com.revature.eval.java.core.EvaluationService;
+import edu.sfsu.EvaluationService;
 
 public class EvaluationServiceTest {
 

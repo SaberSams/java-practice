@@ -1,14 +1,12 @@
 package edu.sfsu;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
 public class EvaluationService {
 
+
+	static class SpeedConverter {
 	/**
 	 * 1.A Speed Converter - Convert to MilesPerHour
 	 *
@@ -22,29 +20,31 @@ public class EvaluationService {
 	 * Otherwise if it is positive, calculate the value of miles per hour, round it
 	 * and return it. For conversion and rounding use Math.round().
 	 */
-	static class SpeedConverter {
-		// TODO: Add method toMilesPerHour
 
-	}
+		public static long toMilesPerHour(double kilometersPerHour) {
+			// TODO: Implement 1.A Speed Converter
+			return 0;
+		}
 
-	/**
-	 * 1.B Speed Converter - Print Conversion
-	 *
-	 * Write another method called printConversion with 1 parameter of type double
-	 * with the name kilometersPerHour. This method needs to return a String and
-	 * needs to calculate milesPerHour from the kilometersPerHour parameter.
-	 *
-	 * The String should print in the format: "XX km/h = YY mi/h"
-	 *
-	 * XX represents the original value kilometersPerHour. YY represents the rounded
-	 * milesPerHour from the kilometersPerHour parameter.
-	 *
-	 * If the parameter kilometersPerHour is < 0, then print the text "Invalid
-	 * Value"
-	 */
-	public static String printConversion(double kilometersPerHour) {
-		// TODO: Implement 1.B Speed Converter - Print Conversion
-		return null;
+		/**
+		 * 1.B Speed Converter - Print Conversion
+		 *
+		 * Write another method called printConversion with 1 parameter of type double
+		 * with the name kilometersPerHour. This method needs to return a String and
+		 * needs to calculate milesPerHour from the kilometersPerHour parameter.
+		 *
+		 * The String should print in the format: "XX km/h = YY mi/h"
+		 *
+		 * XX represents the original value kilometersPerHour. YY represents the rounded
+		 * milesPerHour from the kilometersPerHour parameter.
+		 *
+		 * If the parameter kilometersPerHour is < 0, then print the text "Invalid
+		 * Value"
+		 */
+		public static String printConversion(double kilometersPerHour) {
+			// TODO: Implement 1.B Speed Converter - Print Conversion
+			return null;
+		}
 	}
 
 	/**
@@ -401,7 +401,6 @@ public class EvaluationService {
 		return false;
 	}
 
-
 	/**
 	 * 17. Prime Factors
 	 *
@@ -414,7 +413,6 @@ public class EvaluationService {
 		// TODO: Implement 17. Prime Factors
 		return null;
 	}
-
 
 	/**
 	 * 18. Calculate Nth Prime
