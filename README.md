@@ -1,5 +1,4 @@
 # Java Practice
-> *Credit to Nick Jurczak for the initial version of this assignment - some questions have been replaced or modified to adjust difficulty.*
 
 ## Description
 
