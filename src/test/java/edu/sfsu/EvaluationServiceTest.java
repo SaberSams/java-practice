@@ -431,20 +431,6 @@ public class EvaluationServiceTest {
 	/*******************************************************************
 	 * Question 16
 	 ******************************************************************/
-	@Test
-	public void splitIntSplitsSingleDigits(){
-		for(int i = 0; i <= 9; i++){
-			assertEquals(
-				"[" + i + "]",
-				Arrays.toString(EvaluationService.splitInt(i)));
-		}
-	}
-
-	@Test
-	public void splitIntSplitsLargeInts(){
-			assertEquals("[2, 1, 4, 7, 4, 8, 3, 6, 4, 7]",
-				Arrays.toString(EvaluationService.splitInt(2147483647)));
-	}
 
 	@Test
 	public void singleDigitsAreArmstrongNumbers() {
@@ -640,6 +626,30 @@ public class EvaluationServiceTest {
 			result = false;
 		}
 		assertEquals(true, result);
+	}
+
+	/*******************************************************************
+	 * Question 23
+	 ******************************************************************/
+	@Test
+	public void splitIntSplitsSingleDigits(){
+		for(int i = 0; i <= 9; i++){
+			assertEquals(
+				"[" + i + "]",
+				Arrays.toString(EvaluationService.splitInt(i)));
+		}
+	}
+
+	@Test
+	public void splitIntSplitsLargeInts(){
+			assertEquals("[2, 1, 4, 7, 4, 8, 3, 6, 4, 7]",
+				Arrays.toString(EvaluationService.splitInt(2147483647)));
+	}
+
+	@Test
+	public void splitIntSplitsNegativeInts(){
+			assertEquals("[-1, 2, 3, 4, 5, 6]",
+				Arrays.toString(EvaluationService.splitInt(-123456)));
 	}
 
 }

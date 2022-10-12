@@ -283,17 +283,17 @@ public class EvaluationService {
 		}
 
 		public boolean isEquilateral() {
-			// TODO: Implement isEquilateral
+			// TODO: Implement 12.a isEquilateral
 			return false;
 		}
 
 		public boolean isIsosceles() {
-			// TODO: Implement isIsosceles
+			// TODO: Implement 12.b isIsosceles
 			return false;
 		}
 
 		public boolean isScalene() {
-			// TODO: Implement isScalene
+			// TODO: Implement 12.c isScalene
 			return false;
 		}
 
@@ -492,5 +492,16 @@ public class EvaluationService {
 	public int guessingGame(int minimum, int maximum) {
 		// TODO: Implement 22. Easy Guessing Game
 		return 0;
+	}
+
+	/**
+	 * 23. Number Splitter
+	 * Write a method that splits a number into an array of digits.
+	 * 123456789 would return [1, 2, 3, 4, 5, 6, 7, 8, 9] if a negative number is
+	 * passed the first digit should be the negative sign and the rest positive.
+	 */
+	static int[] splitInt(int input) {
+		// TODO: Implement 23. Number Splitter
+		return null;
 	}
 }
