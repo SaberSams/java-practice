@@ -1,4 +1,4 @@
-package com.revature.eval.java.core;
+package edu.sfsu;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertEquals;
@@ -15,6 +15,8 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import edu.sfsu.EvaluationService;
+
 public class EvaluationServiceTest {
 
 	private static final EvaluationService evaluationService = new EvaluationService();
@@ -29,17 +31,17 @@ public class EvaluationServiceTest {
 	public void testSpeedConverter1() {
 		assertEquals(1, EvaluationService.SpeedConverter.toMilesPerHour(1.5));
 	}
-	
+
 	@Test
 	public void testSpeedConverter2() {
 		assertEquals(6, EvaluationService.SpeedConverter.toMilesPerHour(10.25));
 	}
-	
+
 	@Test
 	public void testSpeedConverterInvalid() {
 		assertEquals(-1, EvaluationService.SpeedConverter.toMilesPerHour(-5.6));
 	}
-	
+
 	/*******************************************************************
 	 * Question 1.B
 	 ******************************************************************/
@@ -47,17 +49,17 @@ public class EvaluationServiceTest {
 	public void testPrintConversion1() {
 		assertEquals("1.5 km/h = 1 mi/h", EvaluationService.SpeedConverter.printConversion(1.5));
 	}
-	
+
 	@Test
 	public void testPrintConversion2() {
 		assertEquals("10.25 km/h = 6 mi/h", EvaluationService.SpeedConverter.printConversion(10.25));
 	}
-	
+
 	@Test
 	public void testPrintConversionInvalid() {
 		assertEquals("Invalid Value", EvaluationService.SpeedConverter.printConversion(-5.6));
 	}
-	
+
 	/*******************************************************************
 	 * Question 2
 	 ******************************************************************/
@@ -65,17 +67,17 @@ public class EvaluationServiceTest {
 	public void testPrintMegaBytesAndKiloBytes1() {
 		assertEquals("2500 KB = 2 MB and 452 KB", evaluationService.printMegaBytesAndKiloBytes(2500));
 	}
-	
+
 	@Test
 	public void testPrintMegaBytesAndKiloBytes2() {
 		assertEquals("5000 KB = 4 MB and 904 KB", evaluationService.printMegaBytesAndKiloBytes(5000));
 	}
-	
+
 	@Test
 	public void testPrintMegaBytesAndKiloBytesInvalid() {
 		assertEquals("Invalid Value", evaluationService.printMegaBytesAndKiloBytes(-1024));
 	}
-	
+
 	/*******************************************************************
 	 * Question 3
 	 ******************************************************************/
@@ -83,17 +85,17 @@ public class EvaluationServiceTest {
 	public void testBarkingDog1() {
 		assertEquals(true, evaluationService.shouldWakeUp(true, 1));
 	}
-	
+
 	@Test
 	public void testBarkingDog2() {
 		assertEquals(false, evaluationService.shouldWakeUp(false, 2));
 	}
-	
+
 	@Test
 	public void testBarkingDogInvalid() {
 		assertEquals(false, evaluationService.shouldWakeUp(true, -1));
 	}
-	
+
 	/*******************************************************************
 	 * Question 4
 	 ******************************************************************/
@@ -101,17 +103,17 @@ public class EvaluationServiceTest {
 	public void testDecimalComparator1() {
 		assertEquals(true, evaluationService.areEqualByThreeDecimalPlaces(-3.1756, -3.175));
 	}
-	
+
 	@Test
 	public void testDecimalComparator2() {
 		assertEquals(false, evaluationService.areEqualByThreeDecimalPlaces(3.175, 3.176));
 	}
-	
+
 	@Test
 	public void testDecimalComparator3() {
 		assertEquals(true, evaluationService.areEqualByThreeDecimalPlaces(3.0, 3.0));
 	}
-	
+
 	/*******************************************************************
 	 * Question 5
 	 ******************************************************************/
@@ -119,17 +121,17 @@ public class EvaluationServiceTest {
 	public void testTeenNumberChecker1() {
 		assertEquals(true, EvaluationService.TeenNumberChecker.hasTeen(9, 99, 19));
 	}
-	
+
 	@Test
 	public void testTeenNumberChecker2() {
 		assertEquals(true, EvaluationService.TeenNumberChecker.hasTeen(23, 15, 42));
 	}
-	
+
 	@Test
 	public void testTeenNumberChecker3() {
 		assertEquals(false, EvaluationService.TeenNumberChecker.hasTeen(22, 34, 44));
 	}
-	
+
 	/*******************************************************************
 	 * Question 6
 	 ******************************************************************/
@@ -137,17 +139,17 @@ public class EvaluationServiceTest {
 	public void testMinutesToDaysAndYears1() {
 		assertEquals("525600 min = 1 y and 0 d", evaluationService.printYearsAndDays(525600));
 	}
-	
+
 	@Test
 	public void testMinutesToDaysAndYears2() {
 		assertEquals("1051200 min = 2 y and 0 d", evaluationService.printYearsAndDays(1051200));
 	}
-	
+
 	@Test
 	public void testMinutesToDaysAndYears3() {
 		assertEquals("561600 min = 1 y and 25 d", evaluationService.printYearsAndDays(561600));
 	}
-	
+
 	/*******************************************************************
 	 * Question 7
 	 ******************************************************************/
@@ -155,12 +157,12 @@ public class EvaluationServiceTest {
 	public void testNumberInWord1() {
 		assertEquals("THREE", evaluationService.printNumberInWord(3));
 	}
-	
+
 	@Test
 	public void testNumberInWord2() {
 		assertEquals("OTHER", evaluationService.printNumberInWord(13));
 	}
-	
+
 	/*******************************************************************
 	 * Question 8
 	 ******************************************************************/
@@ -168,17 +170,17 @@ public class EvaluationServiceTest {
 	public void testGreatestCommonDivisor1() {
 		assertEquals(5, evaluationService.getGreatestCommonDivisor(25, 15));
 	}
-	
+
 	@Test
 	public void testGreatestCommonDivisor2() {
 		assertEquals(6, evaluationService.getGreatestCommonDivisor(12, 30));
 	}
-	
+
 	@Test
 	public void testGreatestCommonDivisor3() {
 		assertEquals(-1, evaluationService.getGreatestCommonDivisor(9, 18));
 	}
-	
+
 	/*******************************************************************
 	 * Question 9
 	 ******************************************************************/
@@ -186,22 +188,22 @@ public class EvaluationServiceTest {
 	public void testFirstAndLastDigit1() {
 		assertEquals(4, evaluationService.sumFirstAndLastDigit(252));
 	}
-	
+
 	@Test
 	public void testFirstAndLastDigit2() {
 		assertEquals(9, evaluationService.sumFirstAndLastDigit(257));
 	}
-	
+
 	@Test
 	public void testFirstAndLastDigit3() {
 		assertEquals(0, evaluationService.sumFirstAndLastDigit(0));
 	}
-	
+
 	@Test
 	public void testFirstAndLastDigitInvalid() {
 		assertEquals(-1, evaluationService.sumFirstAndLastDigit(-10));
 	}
-	
+
 	/*******************************************************************
 	 * Question 10
 	 ******************************************************************/
@@ -425,7 +427,7 @@ public class EvaluationServiceTest {
 		assertEquals(expectedWordCount, actualWordCount);
 	}
 
-	
+
 	/*******************************************************************
 	 * Question 16
 	 ******************************************************************/
@@ -433,7 +435,7 @@ public class EvaluationServiceTest {
 	public void splitIntSplitsSingleDigits(){
 		for(int i = 0; i <= 9; i++){
 			assertEquals(
-				"[" + i + "]", 
+				"[" + i + "]",
 				Arrays.toString(EvaluationService.splitInt(i)));
 		}
 	}
@@ -608,8 +610,8 @@ public class EvaluationServiceTest {
 		int output = evaluationService.getSumOfMultiples(100, set);
 		assertEquals(4950, output);
 	}
-	
-	
+
+
 	/*******************************************************************
 	 * Question 21
 	 ******************************************************************/
@@ -624,9 +626,9 @@ public class EvaluationServiceTest {
 				break;
 			}
 		}
-		assertEquals(3, count);	
+		assertEquals(3, count);
 	}
-	
+
 	/*******************************************************************
 	 * Question 22
 	 ******************************************************************/
@@ -639,7 +641,7 @@ public class EvaluationServiceTest {
 		}
 		assertEquals(true, result);
 	}
-	
+
 }
 
 
